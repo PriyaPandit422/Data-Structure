@@ -1,0 +1,35 @@
+//Stack using array
+
+def push():
+    global top,n
+    if(top+1==n):
+        print('Stack overflow')
+    else:
+        top+=1
+        num=int(input('Enter value'))
+        st.append(num)
+def pop():
+    global top,n
+    if(top==-1):
+        print('Stack is underflow')
+    else:
+        print('Deleted data is ',st.pop())
+        top-=1
+def display():
+    for i in range(top,-1,-1):
+        print(st[i])
+
+
+top=-1
+st=[]
+n=int(input('Enter the range'))
+while True:
+    
+    ch =int(input('1 Push || 2 Pop || 3 display'))
+    if ch==1:
+        push()
+    elif ch==2:
+        pop()
+    elif ch==3:
+        display()
+    

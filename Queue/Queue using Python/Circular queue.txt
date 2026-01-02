@@ -1,0 +1,67 @@
+//Circular queue
+class CircularQueue:
+    def insert(self):
+        global front,rear,size
+        if((front==0 and rear==size-1)or(front==rear+1)):
+            print("Queue is overflow\n")
+        else:
+            if(front==-1):
+                rear=0
+                front=0
+            else:
+                if(rear==size-1):
+                    rear=0
+                else:
+                   rear+=1
+            l[rear]=int(input('Enter the data:'))
+    def delete(self):
+        global rear,front,size
+        if(front==-1):
+            print('Queue is underflow')
+        print(l[front],' is deleted')
+        if(front==rear):
+            front=-1
+            rear=-1
+        else:
+            if(front==size-1):
+                front=0
+            else:
+                front=front+1
+                
+    def display(self):
+        global front,rear,size
+        front_pos=front
+        rear_pos=rear
+        if(front==-1):
+            print('Queue is empty')
+        if(front_pos<=rear_pos):
+            while(front_pos<=rear_pos):
+                print(l[front_pos])
+                front_pos+=1
+        else:
+
+            while(front_pos<=size-1):
+                print(l[front_pos])
+                front_pos+=1
+            front_pos=0
+            while(front_pos<=rear_pos):
+                print(l[front_pos])
+                front_pos+=1
+
+rear=-1
+front=-1
+size=int(input('Enter the size:'))
+l=[0]*size
+while True:
+    obj=CircularQueue()
+    ch =int(input('1 insert ||2 delete || 3 Display'))
+    if ch==1:
+
+        obj.insert()
+    elif ch==2:
+        obj.delete()
+    elif ch==3:
+        
+        obj.display()
+    else:
+        break

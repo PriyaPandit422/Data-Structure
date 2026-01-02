@@ -1,0 +1,103 @@
+//Singly linklist 
+class node:
+    def __init__(self):
+        self.data=int(input('Enter the value'))
+        self.next=None
+class singly:
+    def create(self):
+        global start ,current
+        temp=node()
+        if(start==None):
+            start=temp
+            current=start
+        else:
+            current.next=temp
+            current=temp
+    def insert(self):
+        
+        global start ,current
+        print('Press 1 for insert first node || 2 for any position || 3 for last position:')
+        ch=int(input())
+        temp=node()
+        if ch==1:
+            temp.next=start
+            start=temp
+        elif ch==2:
+            pos=int(input('Enter the position:'))
+            c=1
+            current=start
+            while(current!=None):
+                if pos==1:
+                    temp.next=start
+                    start=temp
+                    
+                if pos==c:
+                    temp1.next=temp
+                    temp.next=current
+                    break
+                c+=1
+                temp1=current
+                current=current.next 
+        elif ch==3:
+            current=start
+            while(current.next!=None):
+                current=current.next
+            current.next=temp
+        else:
+            print('Please enter the corrret position')
+    def display(self):
+        global start ,current
+        current=start
+        while(current!=None):
+            print(current.data)
+            current=current.next
+    def delete(self):
+        global start,current
+        print('Press 1 for delete first node || 2 for any position || 3 for last position:')
+        ch=int(input())
+        if ch==1:
+            current=start
+            start=current.next
+            del(current)
+        elif ch==2:
+            pos=int(input('Enter the position:'))
+            c=1
+            current=start
+            temp=start
+            while current!=None:
+                if pos==1:
+                    start=current.next
+                    del(current)
+                if pos==c:
+                    temp1=current
+                    temp.next=temp1.next
+                    del(temp1)
+                    break
+                c+=1
+                temp=current
+                current=current.next
+        elif ch==3:
+        
+            temp=start
+            while(temp.next!=None):
+                current=temp
+                temp=temp.next
+            current.next=None
+            del(temp)
+        else:
+            print('Enter the correct position')
+
+start=current=None
+obj=singly()
+while True:
+    ch=int(input('Enter 1 for create 2 insert 3 for display 4 for delete'))
+    if ch==1:
+        obj.create()
+    elif ch==2:
+        obj.insert()
+    elif ch==3:
+        obj.display()
+    elif ch==4:
+        obj.delete()
+    else:
+        break

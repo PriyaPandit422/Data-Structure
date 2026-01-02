@@ -1,0 +1,44 @@
+//Stack using linked list
+class node:
+    def __init__(self):
+        self.data=int(input())
+        self.next=None
+class stack:
+    def push(self):
+        global top
+        temp=node()
+        if(top==None):
+            top=temp
+        else:
+            temp.next=top
+            top=temp
+    def pop(self):
+        global top
+        temp=top
+        if(top==None):
+            print('stack is underflow')
+        else:
+            print(temp.data,'is deleted')
+            temp=top
+            top=temp.next
+            del(temp)
+            temp=top
+    def display(self):
+        global top
+        temp=top
+        while(temp!=None):
+            print(temp.data)
+            temp=temp.next
+top=None
+while True:
+    obj=stack()
+    ch =int(input('1 Push || 2 Pop || 3 display'))
+    if ch==1:
+        obj.push()
+    elif ch==2:
+        obj.pop()
+    elif ch==3:
+        
+        obj.display()
+    else:
+        break

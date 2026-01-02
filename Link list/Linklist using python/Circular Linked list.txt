@@ -1,0 +1,64 @@
+//Circular Linked list
+class Node:
+    def __init__(self):
+        self.data=int(input('Enter value:'))
+        self.next=None
+class Circular:
+    def create(self):
+        global current
+        temp=Node()
+        if current==None:
+            current=temp
+            current.next=temp
+        else:
+            temp.next=current.next
+            current.next=temp
+            current=temp
+    def insertion(self):
+        global current
+        temp=Node()
+        num=int(input('Where to insert?'))
+        prev=current
+        temp1=current.next
+        while(temp1!=current):
+            if(temp1.data==num):
+                prev.next=temp
+                temp.next=temp1
+                break
+            prev=temp1
+            temp1=temp1.next
+    def display(self):
+        global current
+        temp=current
+        current=current.next
+        while current!=temp:
+            print(current.data)
+            current=current.next
+        print(current.data)
+    def deletion(self):
+        global current
+        prev=current
+        temp1=current.next
+        val=int(input('Where to delete?'))
+        while(temp1!=current):
+            if temp1.data==val:
+                current=temp1
+                prev.next=temp1.next
+                del(current)
+            prev=temp1
+            temp1=temp1.next
+
+current=None
+obj=Circular()
+while True:
+    ch=int(input('Enter 1 for create 2 insert 3 for display 4 for delete'))
+    if ch==1:
+        obj.create()
+    elif ch==2:
+        obj.insertion()
+    elif ch==3:
+        obj.display()
+    elif ch==4:
+        obj.deletion()
+    else:
+        break

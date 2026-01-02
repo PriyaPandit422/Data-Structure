@@ -1,0 +1,107 @@
+//Doubly linked list
+class Node:
+    def __init__(self):
+        self.prev=None
+        self.data=int(input('Enter Data:'))
+        self.next=None
+class Doubly:
+    def create(self):
+        global start,current
+        temp=Node()
+        if(start==None):
+            start=temp
+            current=temp
+        else:
+            current.next=temp
+            temp.prev=current
+            current=temp
+    def insertion(self):
+        global current,start
+        ch=int(input('1 for first position || 2 for any position || 3 for last position'))
+        temp=Node()
+        if ch==1:
+            temp.next=start
+            start.prev=temp
+            start=temp
+            
+        elif ch==2:
+            current=start
+            pos=int(input('Enter the poaition:'))
+            c=1
+            while(current!=None):
+
+                if pos==1:
+                    temp.next=start
+                    start.prev=temp
+                    start=temp
+                if pos==c:                   
+                    temp.prev=current.prev
+                    temp.next=current
+                    current.prev.next=current.prev=temp
+                c+=1
+                current=current.next
+        elif ch==3:
+            current=start
+            while(current.next!=None):
+                current=current.next
+            current.next=temp
+            temp.prev=current
+
+        else:
+            print('Enter the correct psition')
+    def deletion(self):
+        global current,start
+        ch=int(input('1 for first node || 2 for any postion || 3 for last position delete'))
+        if ch==1:
+            current=start
+            start=start.next
+            current.next=start.prev=None
+            del(current)
+        elif ch==2:
+            pos=int(input('Enter the position:'))
+            c=1
+            current=start
+            while current!=None:
+                if pos==1:
+                    current=start
+                    start=start.next
+                    current.next=start.prev=None
+                    del(current)
+                if pos==c:
+                    current.prev.next=current.next
+                    current.next.prev=current.prev
+                    del(current)
+                c+=1
+                current=current.next
+
+        elif ch==3:
+            current=start
+            while(current.next!=None):
+                current=current.next
+            current.prev.next=current.prev=None
+            del(current)
+        else:
+            print('Enter correct position')
+    def display(self):
+        global start ,current
+        current=start
+        while(current!=None):
+            print(current.data)
+            current=current.next
+
+
+
+start=current=None
+obj=Doubly()
+while True:
+    ch=int(input('Enter 1 for create 2 insert 3 for display 4 for delete'))
+    if ch==1:
+        obj.create()
+    elif ch==2:
+        obj.insertion()
+    elif ch==3:
+        obj.display()
+    elif ch==4:
+        obj.deletion()
+    else:
+        break

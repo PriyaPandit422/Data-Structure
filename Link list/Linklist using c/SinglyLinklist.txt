@@ -1,0 +1,54 @@
+/*Singly link list*/
+#include<stdio.h>
+#include<stdlib.h>
+
+struct Node{
+	int data;
+	struct Node* next;
+}*start =NULL;
+
+Node* createNode(){
+	struct Node* NewNode=(Node*)malloc(sizeof(Node));
+	printf("Enter data:");
+	scanf("%d",&NewNode->data);
+	NewNode->next=NULL;
+	return NewNode;
+}
+void createList(){
+	struct Node* ptr=createNode();
+	if(start==NULL)
+		start=ptr;
+	else{
+		struct Node* ptr1=start;
+		while(ptr1->next!=NULL)
+			ptr1=ptr1->next;
+		ptr1->next=ptr;
+	}
+}
+void printList(){
+	struct Node* ptr=start;
+	while(ptr!=NULL){
+		printf("id:%d\nAddress:%d\n",ptr->data,ptr->next);
+		ptr=ptr->next;
+	}
+}
+int main(){
+	int i=1;
+	while(i){
+		printf("Enter your choice:");
+		int n;
+		scanf("%d",&n);
+		switch(n){
+			case 1:
+				createList();
+				break;
+			case 2:
+				printList();
+				break;
+			default:
+				i=0;
+				break;
+		}
+}
+	return 0;
+}
