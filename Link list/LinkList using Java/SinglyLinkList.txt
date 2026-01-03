@@ -1,5 +1,6 @@
 // Singly linked list
 import java.util.Scanner;
+
 class Node{
 	int data;
 	Node next;
@@ -7,14 +8,13 @@ class Node{
 		this.data=data;
 		this.next=null;
 	}
-// Inserted data at first position
+// Inserted data in list
 	static Node insertAtFirst(Node head,Node newNode) {
 		newNode.next=head;
 		head=newNode;
 		return head;
 		
 	}
-// Inserted data any position
 static Node insertAnyPosition(Node head,Node newNode,int pos) {
 		
 		if(pos==1) {
@@ -42,7 +42,7 @@ static Node insertAnyPosition(Node head,Node newNode,int pos) {
 		}
 		return head;
 	}
-//Display the linkedlist
+// Display Data
 	static void display(Node head) {
 		Node temp;
 		temp=head;
@@ -56,33 +56,55 @@ static Node insertAnyPosition(Node head,Node newNode,int pos) {
 			temp=temp.next;	
 		}
 	}
-// Deleted data first position
+//Deleted data from list
 	static Node deleteAtFirst(Node head) {
-		Node temp=head;
-		head=head.next;
-		temp.next=null;
+		if(head==null) {
+			System.out.println("List is empty");
+		}
+		else {
+			if(head.next==null) {
+				System.out.println("Data is deleted");
+				head=null;
+			}
+			else {
+				Node temp=head;
+				head=head.next;
+				temp.next=null;
+				System.out.println("Data is deleted");
+			}
+		}
 		return head;
 	}
-// Deleted data any position
 	static Node deleteAnyPosition(Node head,int pos) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return head;
+		}
 		if(pos==1) {
-			Node temp=head;
-			head=head.next;
-			temp.next=null;
+			if(head.next==null) {
+				System.out.println("Data is deleted");
+				head=null;
+			}
+			else {
+				Node temp=head;
+				head=head.next;
+				temp.next=null;
+				System.out.println("Data is deleted");
+			}
 			return head;
 		}
 		Node current=head;
 		Node temp = null;
-		int c=1;
+		int c=0;
 		boolean b=true;
 		while(current!=null) {
 			c+=1;
 			if(pos==c) {
 				b=false;
-				temp=current.next;
-				current.next=temp.next;
-				temp.next=null;
+				temp.next=current.next;
+				current.next=null;
 			}
+			temp=current;
 			current=current.next;
 		}
 		if(b) {
@@ -97,7 +119,6 @@ static Node insertAnyPosition(Node head,Node newNode,int pos) {
 public class SinglyLinkedList {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		int data;
 		Scanner sc=new Scanner(System.in);
 		Node start=null;
@@ -149,17 +170,29 @@ public class SinglyLinkedList {
 					start=Node.deleteAtFirst(start);
 				}
 				else if(c==2) {
-					Node temp1=null;
-					temp=start;
-					while(temp.next!=null) {
-						temp1=temp;
-						temp=temp.next;
+					Node temp1=start;
+					if(temp1==null) {
+						System.out.println("List is empty");
 					}
-					temp1.next=null;
+					else {
+						if(start.next==null) {
+							System.out.println("Data is deleted");
+							start=null;
+						}
+						else {
+							temp=start;
+							while(temp.next!=null) {
+								temp1=temp;
+								temp=temp.next;
+							}
+							temp1.next=null;
+							System.out.println("Data is deleted");
+						}
+					}
 				}
 				else if(c==3) {
 					System.out.println("Enter position");
-				   	int pos = sc.nextInt();
+				    int pos = sc.nextInt();
 					start=Node.deleteAnyPosition(start,pos);	
 				}
 				break;
@@ -174,3 +207,4 @@ public class SinglyLinkedList {
 	}
 
 }
+
