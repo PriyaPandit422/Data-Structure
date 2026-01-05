@@ -1,0 +1,404 @@
+//Doubly Linked list
+
+import java.util.Scanner;
+
+class Node1{
+	int data;
+	Node1 prev;
+	Node1 next;
+	Node1(int data){
+		this.data=data;
+		this.prev=null;
+		this.next=null;
+	}
+	static Node1 insertAtFirst(Node1 head,Node1 newNode) {
+		if(head!=null) {
+		newNode.next=head;
+		head.prev=newNode;
+		}
+		head = newNode;
+		System.out.println("Data is inserted");
+		return newNode;
+		
+	}
+	static Node1 insertAnyPosition(Node1 head, Node1 newNode, int pos) {
+
+	    if (pos == 1) {
+	        return insertAtFirst(head, newNode);
+	    }
+
+	    Node1 current = head;
+	    int count = 1;
+
+	    while (current != null && count < pos - 1) {
+	        current = current.next;
+	        count++;
+	    }
+
+	    if (current == null) {
+	        System.out.println("Position not possible");
+	        return head;
+	    }
+
+	    newNode.next = current.next;
+	    newNode.prev = current;
+
+	    if (current.next != null) {
+	        current.next.prev = newNode;
+	    }
+
+	    current.next = newNode;
+
+	    System.out.println("Data is inserted");
+	    return head;import java.util.Scanner;
+
+class Node1{
+	int data;
+	Node1 prev;
+	Node1 next;
+	Node1(int data){
+		this.data=data;
+		this.prev=null;
+		this.next=null;
+	}
+	static Node1 insertAtFirst(Node1 head,Node1 newNode) {
+		if(head!=null) {
+		newNode.next=head;
+		head.prev=newNode;
+		}
+		head = newNode;
+		System.out.println("Data is inserted");
+		return newNode;
+		
+	}
+	static Node1 insertAnyPosition(Node1 head, Node1 newNode, int pos) {
+
+	    if (pos == 1) {
+	        return insertAtFirst(head, newNode);
+	    }
+
+	    Node1 current = head;
+	    int count = 1;
+
+	    while (current != null && count < pos - 1) {
+	        current = current.next;
+	        count++;
+	    }
+
+	    if (current == null) {
+	        System.out.println("Position not possible");
+	        return head;
+	    }
+
+	    newNode.next = current.next;
+	    newNode.prev = current;
+
+	    if (current.next != null) {
+	        current.next.prev = newNode;
+	    }
+
+	    current.next = newNode;
+
+	    System.out.println("Data is inserted");
+	    return head;
+	}
+
+	static void display(Node1 head) {
+		Node1 temp;
+		temp=head;
+		if (temp == null) {
+            System.out.println("List is empty");
+            return;
+        }
+		System.out.println("Show the data");
+		while(temp!=null) {
+			System.out.println(temp.data+"");
+			temp=temp.next;	
+		}
+	}
+	static Node1 deleteAtFirst(Node1 head) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return null;
+		}
+		if(head.next==null) {
+			System.out.println("Data is deleted");
+			return null;
+		}
+		head=head.next;
+		head.prev=null;
+		System.out.println("Data is deleted");
+		return head;
+	}
+	static Node1 deleteAnyPosition(Node1 head,int pos) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return head;
+		}
+		if(pos==1) {
+			return deleteAtFirst(head);
+		}
+		 Node1 current = head;
+		    int count = 1;
+
+		    while (current != null && count < pos) {
+		        current = current.next;
+		        count++;
+		    }
+
+		    if (current == null) {
+		        System.out.println("Position not possible");
+		        return head;
+		    }
+
+		    if (current.next != null) {
+		        current.next.prev = current.prev;
+		   }
+
+	    current.prev.next = current.next;
+		System.out.println("Data is deleted");
+
+		return head;
+	}
+}
+public class DoublyLinkedList1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int data;
+		Scanner sc=new Scanner(System.in);
+		Node1 start=null;
+		Node1 temp=null;
+		Node1 newNode=null;
+		while(true) {
+			
+			System.out.println("1 for insert 2 for display 3 for deletion");
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				System.out.println("Enter the data");
+				data=sc.nextInt();
+				newNode=new Node1(data);
+				if(start==null) {
+					
+					start=newNode;
+				}
+				else {
+					System.out.println("1 for insert first position || 2 for last position||3 for insert any position");
+					int c=sc.nextInt();
+					
+					if(c==1) {
+						start=Node1.insertAtFirst(start,newNode);
+					}
+					else if(c==2) {
+						temp=start;
+						while(temp.next!=null) {
+							temp=temp.next;
+						}
+						temp.next=newNode;
+						newNode.prev=temp;
+					}
+					else if(c==3) {
+						System.out.println("Enter position");
+					    int pos = sc.nextInt();
+						start=Node1.insertAnyPosition(start,newNode,pos);
+						
+					}
+				}
+				break;
+			case 2:
+				Node1.display(start);
+				break;
+			case 3:
+				System.out.println("1 for delete first position || 2 for delete last position||3 for delete any position");
+				int c=sc.nextInt();
+				
+				if(c==1) {
+					start=Node1.deleteAtFirst(start);
+				}
+				else if(c==2) {
+					if(start==null) {
+						System.out.println("List is empty");
+					}
+					else if(start.next==null) {
+						System.out.println("Data is deleted");
+						start=null;
+					}
+					else {
+						temp=start;
+						while(temp.next!=null) {
+							temp=temp.next;
+						}
+						temp.prev.next=null;
+						System.out.println("Data is deleted");
+					}
+				}
+				else if(c==3) {
+					System.out.println("Enter position");
+				    int pos = sc.nextInt();
+					start=Node1.deleteAnyPosition(start,pos);	
+				}
+				break;
+			default:
+				System.out.println("Please select correct one");
+				
+				break;
+			}
+		
+		}
+	
+	
+	}
+
+}
+
+	}
+
+	static void display(Node1 head) {
+		Node1 temp;
+		temp=head;
+		if (temp == null) {
+            System.out.println("List is empty");
+            return;
+        }
+		System.out.println("Show the data");
+		while(temp!=null) {
+			System.out.println(temp.data+"");
+			temp=temp.next;	
+		}
+	}
+	static Node1 deleteAtFirst(Node1 head) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return null;
+		}
+		if(head.next==null) {
+			System.out.println("Data is deleted");
+			return null;
+		}
+		head=head.next;
+		head.prev=null;
+		System.out.println("Data is deleted");
+		return head;
+	}
+	static Node1 deleteAnyPosition(Node1 head,int pos) {
+		if(head==null) {
+			System.out.println("List is empty");
+			return head;
+		}
+		if(pos==1) {
+			return deleteAtFirst(head);
+		}
+		 Node1 current = head;
+		    int count = 1;
+
+		    while (current != null && count < pos) {
+		        current = current.next;
+		        count++;
+		    }
+
+		    if (current == null) {
+		        System.out.println("Position not possible");
+		        return head;
+		    }
+
+		    if (current.next != null) {
+		        current.next.prev = current.prev;
+		   }
+
+	    current.prev.next = current.next;
+		System.out.println("Data is deleted");
+
+		return head;
+	}
+}
+public class DoublyLinkedList1 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int data;
+		Scanner sc=new Scanner(System.in);
+		Node1 start=null;
+		Node1 temp=null;
+		Node1 newNode=null;
+		while(true) {
+			
+			System.out.println("1 for insert 2 for display 3 for deletion");
+			int ch=sc.nextInt();
+			switch(ch) {
+			case 1:
+				System.out.println("Enter the data");
+				data=sc.nextInt();
+				newNode=new Node1(data);
+				if(start==null) {
+					
+					start=newNode;
+				}
+				else {
+					System.out.println("1 for insert first position || 2 for last position||3 for insert any position");
+					int c=sc.nextInt();
+					
+					if(c==1) {
+						start=Node1.insertAtFirst(start,newNode);
+					}
+					else if(c==2) {
+						temp=start;
+						while(temp.next!=null) {
+							temp=temp.next;
+						}
+						temp.next=newNode;
+						newNode.prev=temp;
+					}
+					else if(c==3) {
+						System.out.println("Enter position");
+					    int pos = sc.nextInt();
+						start=Node1.insertAnyPosition(start,newNode,pos);
+						
+					}
+				}
+				break;
+			case 2:
+				Node1.display(start);
+				break;
+			case 3:
+				System.out.println("1 for delete first position || 2 for delete last position||3 for delete any position");
+				int c=sc.nextInt();
+				
+				if(c==1) {
+					start=Node1.deleteAtFirst(start);
+				}
+				else if(c==2) {
+					if(start==null) {
+						System.out.println("List is empty");
+					}
+					else if(start.next==null) {
+						System.out.println("Data is deleted");
+						start=null;
+					}
+					else {
+						temp=start;
+						while(temp.next!=null) {
+							temp=temp.next;
+						}
+						temp.prev.next=null;
+						System.out.println("Data is deleted");
+					}
+				}
+				else if(c==3) {
+					System.out.println("Enter position");
+				    int pos = sc.nextInt();
+					start=Node1.deleteAnyPosition(start,pos);	
+				}
+				break;
+			default:
+				System.out.println("Please select correct one");
+				
+				break;
+			}
+		
+		}
+	
+	
+	}
+
+}
